@@ -1,1 +1,4 @@
-# The above would be my codes for my Junior Developer test project in accordance with my application. Happy New Year!
+# Scandiweb_Test_Assignment
+# Accessible at https://scandiweb12272022.000webhostapp.com/index.php
+#Built using HTML, CSS, PHP, and Jquery
+# Happy New Year!
