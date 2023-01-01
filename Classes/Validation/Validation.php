@@ -43,24 +43,26 @@
         public function validateSku () {
 
             $val = (trim($this->data ['sku']));
-
-            if (empty($val)) {
-
-               $this->addError ('sku', 'Please submit required data');
-
-            } else {
-              
-                if ($this->checkSkuDuplicate() == TRUE) {
+            $sku = empty($val) == TRUE;
+            $validateSku = $this->checkSkuDuplicate() == TRUE;
+            $redirect = empty ($this->fields) == TRUE;
+            
+            if ($sku == TRUE) {
                 
-                $this->addError('sku', 'SKU already exists');
-                
-                }
+                $this->addError('sku', 'Please submit required data');
                 
             }
             
-            if (!empty($fields)) {
+            if ($validateSku == TRUE) {
+                
+                $this->addError('sku', 'SKU already exists');
+                
+            }
+            
+            if ($redirect !== TRUE) {
                 
                 $this->redirect();
+                
             }
             
         }
@@ -68,14 +70,15 @@
         public function validateName () {
 
             $val = (trim($this->data ['name']));
+            $name = empty($val) == TRUE;
+            $redirect = empty ($this->fields) == TRUE;
 
-            if (empty($val)) {
-
-               $this->addError ('name', 'Please submit required data');
-
+            if ($name == TRUE) {
+                
+                $this->addError ('name', 'Please submit required data');
             }
             
-            if (!empty($fields)) {
+            if ($redirect !== TRUE) {
                 
                 $this->redirect();
             }
@@ -84,7 +87,7 @@
 
         public function validatePrice () {
 
-             $val = (trim($this->data ['price']));
+            $val = (trim($this->data ['price']));
 
             if (empty($val)) {
 
@@ -103,20 +106,23 @@
                 
                 $this->redirect();
             }
+                
  
         }
 
         public function validateSelector () {
                 
             $val = ($this->data ['selector']);
-
-            if (empty ($val)) {
-
-                $this->addError ('selector', 'Please provide the data of indicated type');
-
+            $selector = empty($val) == TRUE;
+            $redirect = empty($this->fields) == TRUE;
+                
+            if ($selector == TRUE) {
+                
+                $this->addError('selector', 'Please submit required data');
+                
             }
             
-            if (!empty($fields)) {
+            if ($redirect !== TRUE) {
                 
                 $this->redirect();
             }
@@ -124,7 +130,7 @@
         }
         
         public function validateDvd () {
-            
+
             $dvd = $_POST['selector'];
             
             if ($dvd === 'DVD') {
@@ -262,3 +268,4 @@
         }
         
     }
+
