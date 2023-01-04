@@ -2,7 +2,9 @@
 
     namespace Classes\Validation;
 
-    class Validation extends \Classes\Config\Fetch {
+    //Extend to Fetch Class to reuse checkSkuDuplicate() method
+
+    class Validation extends \Classes\Crud\Fetch {
 
         private $data;
         private $errors = [];
@@ -47,17 +49,23 @@
             $validateSku = $this->checkSkuDuplicate() == TRUE;
             $redirect = empty ($this->fields) == TRUE;
             
+            //Validate if SKU field is filled out. If empty, throw an error
+            
             if ($sku == TRUE) {
                 
                 $this->addError('sku', 'Please submit required data');
                 
             }
             
+            //Validate if SKU already exists. If duplicate is found, throw an error
+            
             if ($validateSku == TRUE) {
                 
                 $this->addError('sku', 'SKU already exists');
                 
             }
+            
+            //If all conditions are met, redirect to List page
             
             if ($redirect !== TRUE) {
                 
@@ -72,11 +80,15 @@
             $val = (trim($this->data ['name']));
             $name = empty($val) == TRUE;
             $redirect = empty ($this->fields) == TRUE;
+            
+            //Validate if Name field is filled out. If empty, throw an error
 
             if ($name == TRUE) {
                 
                 $this->addError ('name', 'Please submit required data');
             }
+            
+            //If all conditions are met, redirect to List page.
             
             if ($redirect !== TRUE) {
                 
@@ -88,6 +100,8 @@
         public function validatePrice () {
 
             $val = (trim($this->data ['price']));
+            
+            //Validate if Price field is filled out
 
             if (empty($val)) {
 
@@ -95,12 +109,16 @@
 
             } else {
                 
+                //Validate if format is correct. Only numbers and decimals are valid datas. 
+                
                 if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $val)) {
                     
                     $this->addError ('price', 'Price must be a number');
                 }
                 
             }
+            
+            //If all conditions are met, redirect to List page.
             
             if (!empty($fields)) {
                 
@@ -115,12 +133,16 @@
             $val = ($this->data ['selector']);
             $selector = empty($val) == TRUE;
             $redirect = empty($this->fields) == TRUE;
+            
+            //Validate that the user selected an option in the dropdown menu. If nothing has been selected, throw an error
                 
             if ($selector == TRUE) {
                 
                 $this->addError('selector', 'Please submit required data');
                 
             }
+            
+            //If all conditions are met, redirect to List page. 
             
             if ($redirect !== TRUE) {
                 
@@ -133,15 +155,21 @@
 
             $dvd = $_POST['selector'];
             
+            //If DVD option is selected, conditions below must be met
+            
             if ($dvd === 'DVD') {
                
                 $val = ($this->data['dvd']);
+                
+                //If DVD input field is left empty, throw an error
             
                 if (empty($val)) {
 
                     $this->addError ('dvd', 'Please provide the data of the indicated type');
 
                 } else {
+                    
+                    //Only numbers and decimals are valid datas
                    
                     if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $val)) {
 
@@ -159,15 +187,21 @@
             
             $furniture = $_POST['selector'];
             
+            //If Furniture option is selected, conditions below must be met
+            
             if ($furniture === 'Furniture') {
                 
                 $val = ($this->data['height']);
+                
+                //All fields must not be empty
                 
                 if (empty($val)) {
                     
                     $this->addError ('height', 'Please provide the data of the indicated type');
                     
                 } else {
+                    
+                    //Only numbers and decimals are valid datas
                    
                     if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $val)) {
                     
@@ -225,7 +259,11 @@
             
             $books = $_POST['selector'];
             
+            //If Books option is selected, conditions below must be met
+            
             if ($books === 'Books') {
+                
+                //Books field must not be empty. Otherwise, throw an error
                 
                 $val = ($this->data['books']);
                 
@@ -234,6 +272,8 @@
                     $this->addError('books', 'Please provide the data of the indicated type');
                     
                 } else {
+                    
+                    //Only numbers and decimals are valid datas
                     
                     if (!preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $val)) {
                     
@@ -248,12 +288,16 @@
         }
         
         private function addError ($key, $val) {
+            
+            //Throw an error per field that does not meet condition
 
             $this->errors[$key] = $val;
                 
         }
         
         private function redirect () {
+            
+        //If Save button is clicked and all conditions are met, redirect to List page
                 
           if (isset ($_POST['save'])) {
              
@@ -268,4 +312,3 @@
         }
         
     }
-
