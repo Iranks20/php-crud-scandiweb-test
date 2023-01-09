@@ -1,6 +1,6 @@
 <html>
-    <meta charset="utf-8">
     <head>
+        <meta charset="utf-8">
         <title>Add Products</title>
         <link rel="stylesheet" type="text/css" href="../../Public/CSS/Style.css">
         <link rel="icon" type="image/x-icon" href="../../Public/CSS/favicon.png">
