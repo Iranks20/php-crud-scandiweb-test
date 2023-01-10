@@ -9,64 +9,64 @@
         public function insertData () {
             
             if (isset ($_POST['save'])) {
-
-                $sku = $_POST['sku'];
-                $name = $_POST['name'];
-                $price = $_POST['price'];
-                $type = $_POST['selector'];
-                $dvd = $_POST['dvd'];
-                $height = $_POST['height'];
-                $width = $_POST['width'];
-                $length = $_POST['length'];
-                $books = $_POST ['books'];
                 
-                //Check if any of the below conditions are met. If duplicate SKU is found, disallow insertion. All fields must be filled out to proceed
+                $skuField = $_POST['sku'];
+                $nameField = $_POST['name'];
+                $priceField = $_POST['price'];
+                $typeField = $_POST['selector'];
+                $dvdField = $_POST['dvd'];
+                $heightField = $_POST['height'];
+                $widthField = $_POST['width'];
+                $lengthField = $_POST['length'];
+                $booksField = $_POST['books'];
+
+                $sku = !empty(trim($skuField));
+                $name = !empty(trim($nameField));
+                $price = !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $priceField)));
+                $type = !empty($typeField);
+                $dvd= !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $dvdField)));
+                $height = !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $heightField)));-
+                $width = !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $widthField)));
+                $length = !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $lengthField)));
+                $books = !empty(trim(preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $booksField)));
+                
+                //Check for any duplicate SKU
                 
                 if ($this->checkSkuDuplicate() == TRUE) {
                     
                     return TRUE;
                     
-                }
-                
-                //DVD
-                
-                else if (!empty($sku) && ($name) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price)) && ($type) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $dvd))) {
+                    //DVD
                     
-                    $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$sku', '$name', '$price', '$type', '$dvd', '$height', '$width', '$length', '$books')";
+                } else if ($sku && $name && $price && $type && $dvd == TRUE) {
+                    
+                    $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$skuField', '$nameField', '$priceField', '$typeField', '$dvdField', '$heightField', '$widthField', '$lengthField', '$booksField')";
                     
                     $insert = $this->connect();
                     mysqli_query($insert, $sql);
+                    
+                    //Furniture
 
-                }
-                
-                //Furniture
-                
-                else if (!empty($sku) && ($name) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price)) && ($type) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $height)) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $width)) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $length))) {
+                } else if ($sku && $name && $price && $type && $height && $width && $length) {
                     
-                     $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$sku', '$name', '$price', '$type', '$dvd', '$height', '$width', '$length', '$books')";
+                    $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$skuField', '$nameField', '$priceField', '$typeField', '$dvdField', '$heightField', '$widthField', '$lengthField', '$booksField')";
+                    
+                    $insert = $this->connect();
+                    mysqli_query($insert, $sql);
+                    
+                    //Books
+                    
+                } else if ($sku && $name && $price && $type && $books) {
+                    
+                    $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$skuField', '$nameField', '$priceField', '$typeField', '$dvdField', '$heightField', '$widthField', '$lengthField', '$booksField')";
                     
                     $insert = $this->connect();
                     mysqli_query($insert, $sql);
                     
                 }
                 
-                //Books
-                
-                else if (!empty($sku) && ($name) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $price)) && ($type) && (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $books))) {
-                    
-                    $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$sku', '$name', '$price', '$type', '$dvd', '$height', '$width', '$length', '$books')";
-                    
-                    $insert = $this->connect();
-                    mysqli_query($insert, $sql);
-                    
-                }
-                
-            } else { 
+            } 
             
-                return FALSE;
-                
-            }
-                    
         }
-          
+        
     }
