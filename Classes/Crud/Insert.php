@@ -47,7 +47,7 @@
                     
                     //Furniture
 
-                } else if ($sku && $name && $price && $type && $height && $width && $length) {
+                } else if ($sku && $name && $price && $type && $height && $width && $length == TRUE) {
                     
                     $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$skuField', '$nameField', '$priceField', '$typeField', '$dvdField', '$heightField', '$widthField', '$lengthField', '$booksField')";
                     
@@ -56,7 +56,7 @@
                     
                     //Books
                     
-                } else if ($sku && $name && $price && $type && $books) {
+                } else if ($sku && $name && $price && $type && $books == TRUE) {
                     
                     $sql = "INSERT INTO scandiweb (sku, name, price, type, dvd, height, width, length, books) VALUES ('$skuField', '$nameField', '$priceField', '$typeField', '$dvdField', '$heightField', '$widthField', '$lengthField', '$booksField')";
                     
