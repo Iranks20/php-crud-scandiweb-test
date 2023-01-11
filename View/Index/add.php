@@ -17,9 +17,6 @@
         
     } 
 
-    $add = new Classes\Crud\Insert;
-    $add->insertData();
-
     include_once "../Add/head.php";
     include_once "../Shared/footer.php";
     
