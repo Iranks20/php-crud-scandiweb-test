@@ -1,3 +1,16 @@
+<?php include_once "../../Classes/Crud/Insert.php"; 
+
+$dvd = new DVD;
+$dvd->insertData();
+
+$furniture = new Furniture;
+$furniture->insertData();
+
+$book = new Book;
+$book->insertData();
+
+?>
+
 <html>
     <head>
         <meta charset="utf-8">
