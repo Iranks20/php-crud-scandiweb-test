@@ -12,7 +12,7 @@
             <div class="buttons">
                 <button type="button" value="add" name="add" id="add-product-btn" method="post"><a href="add.php"><b>ADD</b></a>
                 </button>
-                <button type="submit" value="mass-delete" name="mass-delete" id="delete-product-btn" method="POST" action=""><a href='#'><b>MASS DELETE</b></a></button>
+                <button type="submit" value="mass-delete" name="mass-delete" id="delete-product-btn" method="POST" action=""><a href='#'><b>MASSsssss DELETE</b></a></button>
             </div>
             <hr>
             <?php 

@@ -23,7 +23,7 @@ $book->insertData();
     <body>
         <form id="product_form" action="" method="POST">
             <div class="buttons">
-                <button type="submit" name="save" class="save-btn"><a href=""><b>Save</b></a>
+                <button type="submit" name="save" class="save-btn"><a href=""><b>Saveeeee</b></a>
                 </button>
                 <button type="button" name="cancel" class="cancel-btn"><a href="index.php"><b>Cancel</b></a>
                 </button>
